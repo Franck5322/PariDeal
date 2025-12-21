@@ -280,10 +280,12 @@ label {
 }
 
 
-.mot-cle-1, .mot-cle-2 {
+.mot-cle-1,
+.mot-cle-2 {
 
     min-width: 0;
-    height: 40px; /* hauteur correcte */
+    height: 40px;
+    /* hauteur correcte */
 }
 
 .mot-cle-1 {
@@ -326,7 +328,8 @@ ul {
     width: 100%;
 }
 
-.dropdown-btn, .dropdown-btn-map{
+.dropdown-btn,
+.dropdown-btn-map {
     width: 100%;
     min-width: 150px;
     height: 50px;
@@ -340,9 +343,6 @@ ul {
 
 }
 
-.dropdown-btn-map {
-    width: 100%;
-}
 
 .dropdown-content {
     display: none;
@@ -390,4 +390,3 @@ ul {
     display: flex;
     gap: 10px;
 }
-
