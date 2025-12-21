@@ -107,7 +107,9 @@ label:hover {
 .slogan,
 .accroche {
     color: darkslategrey;
+    text-align: left;
 }
+
 
 #select {
     width: 150px;
@@ -258,8 +260,8 @@ label {
 }
 
 .recherche {
-    width: 96%;
-    height: 50px;
+    flex-shrink: 0;
+    width: auto;
     border-radius: 10px;
     display: block;
     font-size: large;
@@ -278,12 +280,13 @@ label {
 }
 
 .mot-cle-1 {
-    width: 92%;
+    flex: 1;
+    min-width: 0;
 }
 
 .mot-cle-2 {
-    width: 37vw;
-    margin-left: 4px;
+    flex: 1;
+    min-width: 0;
 }
 
 #code-postal {
@@ -295,12 +298,12 @@ ul {
 }
 
 .recherche-spot {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     background: linear-gradient(to bottom, #e0cda9, #c8b27a);
     border-radius: 10px;
-    margin: 0 -30px;
-    padding-left: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px;
 }
 
 
@@ -313,14 +316,16 @@ ul {
 
 
 .dropdown-btn, .dropdown-btn-map{
-    width: 40vw;
+
+    flex: 1;
+    min-width: 150px;
     padding: 10px 15px;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
     cursor: pointer;
     font-size: medium;
-    margin-left: 4px;
+
 }
 
 .dropdown-btn-map {
@@ -346,8 +351,8 @@ ul {
 .filt-sort,
 .show-map {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .text a {
@@ -374,6 +379,5 @@ ul {
 
 .input-recherche {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
 }
