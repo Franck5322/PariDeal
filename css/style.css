@@ -341,12 +341,13 @@ ul {
 
 .dropdown-content {
     display: none;
-    /* caché par défaut */
     position: absolute;
     z-index: 1000;
     font-size: medium;
     background-color: #fff;
-    width: 297px;
+    width: 100%;
+    left: 0;
+    box-sizing: border-box;
     max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
