@@ -262,6 +262,7 @@ label {
 .recherche {
     flex-shrink: 0;
     width: auto;
+    height: 50px;
     border-radius: 10px;
     display: block;
     font-size: large;
@@ -272,21 +273,25 @@ label {
 
 #mot-cle,
 #code-postal {
-    height: 40px;
     border-radius: 10px;
     font-size: large;
     padding-left: 20px;
     border: 2px solid black;
 }
 
-.mot-cle-1 {
-    flex: 1;
+
+.mot-cle-1, .mot-cle-2 {
+
     min-width: 0;
+    height: 40px; /* hauteur correcte */
+}
+
+.mot-cle-1 {
+    margin-bottom: 10px;
 }
 
 .mot-cle-2 {
     flex: 1;
-    min-width: 0;
 }
 
 #code-postal {
@@ -299,7 +304,7 @@ ul {
 
 .recherche-spot {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     background: linear-gradient(to bottom, #e0cda9, #c8b27a);
     border-radius: 10px;
@@ -307,24 +312,31 @@ ul {
 }
 
 
-.dropdown-filter,
-.dropdown-sorter {
+.dropdown-filter {
+    flex: 1;
     position: relative;
     margin-bottom: 20px;
+    min-width: 150px;
 }
 
-
+.filt-sort,
+.show-map {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
 
 .dropdown-btn, .dropdown-btn-map{
-
-    flex: 1;
+    width: 100%;
     min-width: 150px;
+    height: 50px;
     padding: 10px 15px;
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
     cursor: pointer;
     font-size: medium;
+
 
 }
 
@@ -348,12 +360,9 @@ ul {
     border-radius: 5px;
 }
 
-.filt-sort,
-.show-map {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+
+
+
 
 .text a {
     text-decoration: none;
@@ -381,3 +390,4 @@ ul {
     display: flex;
     gap: 10px;
 }
+
