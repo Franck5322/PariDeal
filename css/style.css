@@ -282,10 +282,8 @@ label {
 
 .mot-cle-1,
 .mot-cle-2 {
-
     min-width: 0;
     height: 40px;
-    /* hauteur correcte */
 }
 
 .mot-cle-1 {
@@ -338,8 +336,6 @@ ul {
     border-radius: 10px;
     cursor: pointer;
     font-size: medium;
-
-
 }
 
 
@@ -358,10 +354,6 @@ ul {
     border: 1px solid black;
     border-radius: 5px;
 }
-
-
-
-
 
 .text a {
     text-decoration: none;
