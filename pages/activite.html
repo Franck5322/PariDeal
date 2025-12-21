@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../assets/images/parideal-modified.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities</title>
+    <!-- CSS Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- JS Leaflet -->
+
+</head>
+
+<body>
+    <div class="banderole">
+        <a href="../index.html"><img src="../assets/images/PariDeal_V3.png" alt="logo_site" class="logo"></a>
+        <div class="cercle" id="menuBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu" id="sideMenu">
+
+        <ul>
+
+            <li>
+                <a href="../index.html">Accueil</a>
+            </li>
+            <li><a href="../pages/activite.html">Toutes les activités</a></li>
+            <li><a href="../pages/about_us.html">À propos</a></li>
+
+        </ul>
+    </nav>
+
+    <h2 class="slogan">Vos activités 🏛️</h2>
+
+    <div class="recherche-activite">
+
+        <div class="input-recherche">
+            <input class="mot-cle-2" type="text" id="mot-cle" placeholder="🌟 Recherche par mots clés"
+                autocomplete="off">
+
+            <input class="mot-cle-2" type="text" id="code-postal" placeholder="Code Postal" autocomplete="off">
+        </div>
+
+        <br>
+        <div class="filt-sort">
+            <div class="dropdown-filter">
+                <button class="dropdown-btn"><strong>🗂️ Catégories</strong></button>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" class="filter-activity" value="Musée" checked> Musée</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Exposition" checked>
+                        Exposition</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Théâtre" checked> Théâtre</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Concert" checked> Concert</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Cinéma" checked> Cinéma</label><br>
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="sorter">
+                <div class="dropdown-filter sort-dropdown">
+                    <button class="dropdown-btn"><strong>🔀 Trier par</strong></button>
+                    <div class="dropdown-content">
+                        <label><input type="radio" name="sort" class="sort-option" value="price-desc"> Prix
+                            décroissant</label><br>
+                        <label><input type="radio" name="sort" class="sort-option" value="price-asc"> Prix
+                            croissant</label><br>
+                        <label><input type="radio" name="sort" class="sort-option" value="title-asc"> Nom
+                            A→Z</label><br>
+                        <label><input type="radio" name="sort" class="sort-option" value="title-desc"> Nom
+                            Z→A</label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bouton pour afficher la carte (optionnel si tu veux un bouton général) -->
+
+        <div class="show-map">
+            <button class="dropdown-btn-map" id="btn-show-map"><strong>🗺️ Afficher la carte</strong></button>
+
+
+        </div>
+
+
+        <!-- Carte principale -->
+        <div id="map" style="height: 500px; width: 100%; display: none; margin-top: 20px;"></div>
+
+        <br>
+
+
+        <div class="container">
+            <div class="card" data-category="Musée" data-title="Musée du Louvre" data-price="0" data-lat="48.8606"
+                data-lng="2.3376" data-cp="75001">
+                <img src="../assets/images/musee_louvre.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://ticket.louvre.fr/" target="_blank">
+                            <h3>Musée du Louvre</h3>
+                        </a>
+
+                        <span class="categorie">Musée</span>
+                    </div>
+
+                    <div class="price-box">
+                        <del class="old-price">22€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card" data-category="Théâtre" data-title="Comédie Française" data-price="16"
+                data-lat="48.852968" data-lng="2.349902" data-cp="75001">
+                <img src="../assets/images/comedie-francaise.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.comedie-francaise.fr/fr/en-vente-actuellement" target="_blank">
+                            <h3>Comédie Française</h3>
+                        </a>
+
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 32€</del>
+                        <div class="new-price">
+                            <span>≈ 16€</span>
+                            <span class="condition">(–28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Rodin" data-price="0" data-lat="48.855133"
+                data-lng="2.315818" data-cp="75007">
+                <img src="../assets/images/musee_rodin.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-rodin.fr/" target="_blank">
+                            <h3>Musée Rodin</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="UGC Les Halles Cinéma" data-price="9.9"
+                data-lat="48.861048" data-lng="2.347053" data-cp="75001">
+                <img src="../assets/images/ugc-les-halles.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.ugc.fr/cinema-ugc-cine-cite-les-halles.html" target="_blank">
+                            <h3>UGC Les Halles</h3>
+                        </a>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15,90€</del>
+                        <div class="new-price">
+                            <span>9,90€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée d’Orsay" data-price="0" data-lat="48.859961"
+                data-lng="2.326561" data-cp="75007">
+                <img src="../assets/images/musee-d-orsay.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-orsay.fr/" target="_blank">
+                            <h3>Musée d’Orsay</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">16€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- <div class="card" data-category="Exposition" data-title="Centre Pompidou" data-price="0"
+                data-lat="48.860642" data-lng="2.352245" data-cp="75004">
+                <img src="../assets/images/paris-centre-pompidou.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.centrepompidou.fr/" target="_blank">
+                            <h3>Centre Pompidou</h3>
+                        </a>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card" data-category="Cinéma" data-title="Forum des Images" data-price="6" data-lat="48.861048"
+                data-lng="2.347350" data-cp="75001">
+                <img src="../assets/images/Forum_images.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.forumdesimages.fr/" target="_blank">
+                            <h3>Forum des Images</h3>
+                        </a>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">7,50€</del>
+                        <div class="new-price">
+                            <span>6€</span>
+                            <span class="condition">(–30 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Concert" data-title="Philharmonie de Paris" data-price="11"
+                data-lat="48.889706" data-lng="2.393345" data-cp="75019">
+                <img src="../assets/images/Philharmonie_Concert.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://philharmoniedeparis.fr/fr/agenda-selection/jeunes-28-ans" target="_blank">
+                            <h3>Philharmonie de Paris</h3>
+                        </a>
+                        <span class="categorie">Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 30€</del>
+                        <div class="new-price">
+                            <span>11€</span>
+                            <span class="condition">(Offre spéciale –28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée d’Art Moderne de Paris" data-price="0"
+                data-lat="48.864017" data-lng="2.297050" data-cp="75016">
+                <img src="../assets/images/musee-art-moderne.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.mam.paris.fr/en/information" target="_blank">
+                            <h3>Musée d’Art Moderne de Paris</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">0€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(Collections permanantes)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card" data-category="Musée" data-title="Petit Palais" data-price="0" data-lat="48.866316"
+                data-lng="2.313504" data-cp="75008">
+                <img src="../assets/images/petit-palais.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.petitpalais.paris.fr/" target="_blank">
+                            <h3>Petit Palais</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">0€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre de l’Odéon" data-price="15"
+                data-lat="48.849393" data-lng="2.338302" data-cp="75006">
+                <img src="../assets/images/theatre-odeon.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatre-odeon.eu/" target="_blank">
+                            <h3>Théâtre de l’Odéon</h3>
+                        </a>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 30€</del>
+                        <div class="new-price">
+                            <span>≈ 15€</span>
+                            <span class="condition">(–28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Exposition" data-title="Palais de Tokyo" data-price="9"
+                data-lat="48.863513" data-lng="2.297223" data-cp="75016">
+                <img src="../assets/images/palais-tokyo.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://palaisdetokyo.com/" target="_blank">
+                            <h3>Palais de Tokyo</h3>
+                        </a>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">13€</del>
+                        <div class="new-price">
+                            <span>9€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Carnavalet" data-price="0" data-lat="48.857882"
+                data-lng="2.362272" data-cp="75003">
+                <img src="../assets/images/Musee-carnavalet.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.carnavalet.paris.fr/" target="_blank">
+                            <h3>Musée Carnavalet</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">0€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Exposition" data-title="Fondation Louis Vuitton" data-price="10"
+                data-lat="48.876902" data-lng="2.263564" data-cp="75016">
+                <img src="../assets/images/fondation-louis-vuitton.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.fondationlouisvuitton.fr/" target="_blank">
+                            <h3>Fondation Louis Vuitton</h3>
+                        </a>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">16€</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Zadkine" data-price="0" data-lat="48.843018"
+                data-lng="2.329588" data-cp="75006">
+                <img src="../assets/images/musee-zadkine.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://zadkine.paris.fr/" target="_blank">
+                            <h3>Musée Zadkine</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musée Bourdelle" data-price="0" data-lat="48.842167"
+                data-lng="2.319964" data-cp="75015">
+                <img src="../assets/images/musee-bourdelle.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.bourdelle.paris.fr/" target="_blank">
+                            <h3>Musée Bourdelle</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">0€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musée Cognacq-Jay" data-price="0" data-lat="48.859961"
+                data-lng="2.366208" data-cp="75003">
+                <img src="../assets/images/musee-cognacq-jay.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.cognacq-jay.paris.fr/" target="_blank">
+                            <h3>Musée Cognacq-Jay</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">0€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Guimet (Arts asiatiques)" data-price="0"
+                data-lat="48.866013" data-lng="2.287833" data-cp="75016">
+                <img src="../assets/images/musee-guimet.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.guimet.fr/" target="_blank">
+                            <h3>Musée Guimet (Arts asiatiques)</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">13€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Jean-Jacques Henner" data-price="0"
+                data-lat="48.871100" data-lng="2.307400" data-cp="75017">
+                <img src="../assets/images/musee-jj-henner.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://musee-henner.fr/" target="_blank">
+                            <h3>Musée Jean-Jacques Henner</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">8€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Palais Galliera (Musée de la Mode)" data-price="12"
+                data-lat="48.866475" data-lng="2.296881" data-cp="75016">
+                <img src="../assets/images/palais-galliera.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.palaisgalliera.paris.fr/" target="_blank">
+                            <h3>Palais Galliera (Musée de la Mode)</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€</del>
+                        <div class="new-price">
+                            <span>12€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée de la Poste" data-price="0" data-lat="48.837500"
+                data-lng="2.316500" data-cp="75015">
+                <img src="../assets/images/musee-de-la-poste.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.museedelaposte.fr/" target="_blank">
+                            <h3>Musée de la Poste</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musée des Arts et Métiers industrie" data-price="0"
+                data-lat="48.866500" data-lng="2.355300" data-cp="75003">
+                <img src="../assets/images/musee-arts-et-metiers.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.arts-et-metiers.net/" target="_blank">
+                            <h3>Musée des Arts et Métiers</h3>
+                        </a>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12€</del>
+                        <div class="new-price">
+                            <span>0€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="mk2 Bibliothèque" data-price="9" data-lat="48.833708"
+                data-lng="2.376916" data-cp="75013">
+                <img src="../assets/images/mk2-bibliotheque.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.mk2.com/salle/mk2-bibliotheque" target="_blank">
+                            <h3>mk2 Bibliothèque</h3>
+                        </a>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12,90€</del>
+                        <div class="new-price">
+                            <span>8,90€</span>
+                            <span class="condition">(Carte Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Exposition" data-title="Fondation Cartier pour l'art contemporain"
+                data-price="10" data-lat="48.8624063" data-lng="2.3373242" data-cp="75001">
+                <img src="../assets/images/fondation-cartier.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.fondationcartier.com/" target="_blank">
+                            <h3>Fondation Cartier pour l’art contemporain</h3>
+                        </a>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15€</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(–30 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Concert" data-title="Opéra de Paris – Palais Garnier" data-price="10"
+                data-lat="48.8719" data-lng="2.3316" data-cp="75009">
+                <img src="../assets/images/opera-paris.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.operadeparis.fr/billetterie/offres/avant-premieres-jeunes-1" target="_blank">
+                            <h3>Opéra de Paris – Palais Garnier</h3>
+                        </a>
+                        <span class="categorie">Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 105€</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Offre spéciale –28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+        <!-- Select2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <!-- Ton JS séparé -->
+        <script src="../js/main.js"></script>
+
+
+</body>
+
+</html>

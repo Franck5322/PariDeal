@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="icon" href="../assets/images/parideal-modified.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PariDeal</title>
+</head>
+
+<body>
+    <div class="banderole">
+        <a href="../index.html"><img src="../assets/images/PariDeal_V3.png" alt="logo_site" class="logo"></a>
+        <div class="cercle" id="menuBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu" id="sideMenu">
+
+        <ul>
+
+            <li>
+                <a href="../index.html">Accueil</a>
+            </li>
+            <li><a href="../pages/activite.html">Toutes les activités</a></li>
+            <li><a href="../pages/about_us.html">À propos</a></li>
+
+        </ul>
+    </nav>
+
+    <h2 class="slogan">Découvrez Paris sans jamais payer le prix fort ⚜️</h2>
+
+    <p>Vous êtes étudiant à Paris: fini la routine métro-études-dodo ! La capitale regorge d'activités, de lieux
+        culturels et de sorties inoubliables. Le seul frein ? Le prix 💰. <br><br>
+
+        PariDeal est votre allié pour transformer votre statut étudiant en véritable pouvoir d'achat et découvrir Paris
+        sans vider votre compte.</p>
+    <br>
+    <img src="assets/images/paysage_paris.jpg" alt="paysageparis" class="paysageParis">
+
+    <br>
+    <br>
+
+    <div class="recherche-spot">
+
+        <input class="mot-cle-1" type="text" id="mot-cle" placeholder="🌟 Recherche par mots clés" autocomplete="off">
+
+        <br>
+        <br>
+
+
+        <button id="btnRecherche" class="recherche"><strong>🔍 Rechercher</strong></button>
+        <script>
+            document.getElementById('btnRecherche').addEventListener('click', function () {
+                const keyword = encodeURIComponent(document.getElementById('mot-cle').value);
+                window.location.href = `pages/activite.html?mot=${keyword}`;
+            });
+        </script>
+
+
+
+
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+        <!-- Select2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <!-- Ton JS séparé -->
+        <script src="js/main.js"></script>
+
+
+
+
+</body>
+
+</html>

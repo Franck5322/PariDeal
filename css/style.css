@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    background-color: whitesmoke;
+    margin: 70px;
+    text-align: justify;
+    font-size: large;
+}
+
+img {
+    cursor: pointer;
+}
+
+.banderole {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: beige;
+    border-bottom: 2px solid black;
+    z-index: 1000;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
+    margin-left: 70px;
+}
+
+.cercle {
+    width: 50px;
+    height: 50px;
+    margin-right: 70px;
+    border-radius: 50%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cercle:hover {
+    background-color: #e0d5b3;
+}
+
+.cercle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 3px 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.cercle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 3px);
+}
+
+.cercle.active .bar:nth-child(2) {
+    transform: rotate(-45deg) translate(3px, -3px);
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    border: 2px solid black;
+    background-color: beige;
+}
+
+input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+label {
+    padding-left: 10px;
+    transition: color 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+label:hover {
+    color: gray;
+}
+
+.partie,
+.slogan,
+.accroche {
+    color: darkslategrey;
+}
+
+#select {
+    width: 150px;
+    font-size: large;
+    cursor: pointer
+}
+
+
+button:hover {
+    background-color: #e0d5b3;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.card img {
+    width: 100%;
+    height: 70%;
+    border-radius: 10px;
+}
+
+.price-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.new-price {
+    font-weight: 700;
+    font-size: larger;
+    color: #d12a2a;
+}
+
+.bloc-text {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    padding-top: 0px;
+}
+
+.categorie {
+    background-color: beige;
+    border-radius: 6px;
+    padding: 4px;
+    display: inline-block;
+}
+
+.condition {
+    font-size: large;
+}
+
+.text h3,
+.new-price {
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    max-height: 155px;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+label {
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 100%;
+    height: calc(100%-110px);
+    background: #F3E9D2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.side-menu {
+    position: fixed;
+    top: 110px;
+    right: 0;
+    width: 100%;
+    height: calc(100% - 110px);
+    background: #F3E9D2;
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+    z-index: 11;
+    padding: 30px 20px;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.side-menu ul {
+    list-style: none;
+    margin: 10px 70px;
+}
+
+.side-menu li {
+    margin-bottom: 50px;
+
+}
+
+.side-menu a {
+    display: block;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    transition: color 0.25 ease;
+
+}
+
+.side-menu a:hover {
+    color: gray;
+}
+
+.recherche {
+    width: 96%;
+    height: 50px;
+    border-radius: 10px;
+    display: block;
+    font-size: large;
+    background-color: beige;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#mot-cle,
+#code-postal {
+    height: 40px;
+    border-radius: 10px;
+    font-size: large;
+    padding-left: 20px;
+    border: 2px solid black;
+}
+
+.mot-cle-1 {
+    width: 92%;
+}
+
+.mot-cle-2 {
+    width: 37vw;
+    margin-left: 4px;
+}
+
+#code-postal {
+    width: 37vw;
+}
+
+ul {
+    margin-top: 0px;
+}
+
+.recherche-spot {
+    background: linear-gradient(to bottom, #e0cda9, #c8b27a);
+    border-radius: 10px;
+    margin: 0 -30px;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+.dropdown-filter,
+.dropdown-sorter {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+
+.dropdown-btn, .dropdown-btn-map{
+    width: 40vw;
+    padding: 10px 15px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: medium;
+    margin-left: 4px;
+}
+
+.dropdown-btn-map {
+    width: 100%;
+}
+
+.dropdown-content {
+    display: none;
+    /* caché par défaut */
+    position: absolute;
+    z-index: 1000;
+    font-size: medium;
+    background-color: #fff;
+    width: 297px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.filt-sort,
+.show-map {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.25 ease;
+}
+
+.text a:hover {
+    color: gray;
+}
+
+.leaflet-popup-content .condition {
+    font-size: 12px !important;
+}
+
+
+
+#map {
+    position: relative;
+    z-index: 1;
+}
+
+.input-recherche {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
