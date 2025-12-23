@@ -29,21 +29,6 @@ $(document).click(function (e) {
     }
 });
 
-// Filtrer les cartes selon les checkboxes
-$('.filter-activity').on('change', function () {
-    let selectedActivities = $('.filter-activity:checked').map(function () {
-        return $(this).val();
-    }).get();
-
-    $('.card').each(function () {
-        let cardCategory = $(this).find('.categorie').text().trim();
-        if (selectedActivities.includes(cardCategory)) {
-            $(this).show();
-        } else {
-            $(this).hide();
-        }
-    });
-});
 
 $(document).ready(function () {
     // Fonction pour filtrer les cartes
@@ -98,15 +83,26 @@ $('input[name="sort"]').on('change', function () {
     $container.append($cards); // réinjecte les cartes triées
 });
 
-
 $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const keyword = urlParams.get('mot');
+    const url = new URL(window.location.href);
+    const keyword = url.searchParams.get('mot');
+
     if (keyword) {
-        $('.filter-keyword').val(keyword);  // mettre la valeur dans la barre de recherche
-        $('.filter-keyword').trigger('input'); // déclencher le filtrage
+        // 1️⃣ Appliquer le mot-clé une seule fois
+        $('#mot-cle').val(keyword);
+        $('#mot-cle').trigger('input');
+
+        // 2️⃣ Nettoyer l’URL (important pour le reload)
+        url.searchParams.delete('mot');
+        window.history.replaceState({}, document.title, url.pathname);
+    } else {
+        // 3️⃣ Si reload ou accès direct → reset
+        $('#mot-cle').val('');
+        $('.card').show();
     }
 });
+
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
