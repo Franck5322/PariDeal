@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const markers = [];
 
             cards.forEach(card => {
+
                 const lat = parseFloat(card.dataset.lat);
                 const lng = parseFloat(card.dataset.lng);
 
@@ -146,9 +147,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const category = card.dataset.category;
 
+                    const addressEl = card.querySelector('address');
+                    const addressText = addressEl ? addressEl.dataset.address : '';
+
+
                     const popupContent = `
                     <div>
                         <div>${titleHTML}</div>
+                         <address>${addressText}</address>
                         <div>${category}</div>
                         <div>Prix: ${priceHTML}</div>
                     </div>
@@ -187,11 +193,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const priceHTML = priceDiv ? priceDiv.innerHTML : '';
 
             const category = card.dataset.category;
+            const addressEl = card.querySelector('address');
+            const addressText = addressEl ? addressEl.dataset.address : '';
 
             const popupContent = `
                 <div>
                     <div>${titleHTML}</div>
-                    <div>Catégorie: ${category}</div>
+                     <address>${addressText}</address>
+                    <div>${category}</div>
                     <div>Prix: ${priceHTML}</div>
                 </div>
             `;
@@ -232,4 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+
 
