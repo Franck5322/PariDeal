@@ -205,13 +205,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `;
 
-            if (window.currentMarker) {
-                window.myMap.removeLayer(window.currentMarker);
+            // Si les markers n'existent pas encore, on les crée tous
+            if (!window.markers || window.markers.length === 0) {
+                window.markers = [];
+                const allCards = document.querySelectorAll('.card');
+                allCards.forEach(c => {
+                    const lat = parseFloat(c.dataset.lat);
+                    const lng = parseFloat(c.dataset.lng);
+                    if (!isNaN(lat) && !isNaN(lng)) {
+                        const titleLink = c.querySelector('.text a');
+                        const titleHTML = titleLink ? titleLink.outerHTML : c.dataset.title;
+                        const priceDiv = c.querySelector('.new-price');
+                        const priceHTML = priceDiv ? priceDiv.innerHTML : '';
+                        const category = c.dataset.category;
+                        const addressEl = c.querySelector('address');
+                        const addressText = addressEl ? addressEl.dataset.address : '';
+
+                        const popupContent = `
+                <div>
+                    <div>${titleHTML}</div>
+                    <address>${addressText}</address>
+                    <div>${category}</div>
+                    <div>Prix: ${priceHTML}</div>
+                </div>
+            `;
+                        const marker = L.marker([lat, lng]).addTo(window.myMap)
+                            .bindPopup(popupContent);
+                        window.markers.push(marker);
+                    }
+                });
             }
 
-            window.currentMarker = L.marker([lat, lng]).addTo(window.myMap)
-                .bindPopup(popupContent)
-                .openPopup();
+            // Zoom sur la carte cliquée
+            window.myMap.setView([lat, lng], 16);
+
+            // Ouvre le popup du marker correspondant
+            const clickedMarker = window.markers.find(m => {
+                const mLatLng = m.getLatLng();
+                return mLatLng.lat === lat && mLatLng.lng === lng;
+            });
+            if (clickedMarker) clickedMarker.openPopup();
+
 
             window.myMap.setView([lat, lng], 16);
         });
