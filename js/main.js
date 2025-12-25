@@ -1,7 +1,9 @@
-
+/*************************
+ * MENU MOBILE
+ *************************/
 const menuBtn = document.getElementById('menuBtn');
 const sideMenu = document.getElementById('sideMenu');
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay');
 
 menuBtn.addEventListener('click', () => {
     menuBtn.classList.toggle('active');
@@ -13,268 +15,203 @@ overlay.addEventListener('click', () => {
     menuBtn.classList.remove('active');
     sideMenu.classList.remove('open');
     overlay.classList.remove('show');
-
 });
 
 
-// Toggle menu déroulant
-$('.dropdown-btn').click(function () {
+/*************************
+ * DROPDOWN FILTRES
+ *************************/
+$('.dropdown-btn').on('click', function (e) {
+    e.stopPropagation();
     $(this).next('.dropdown-content').slideToggle(200);
 });
 
-// Fermer le menu si clic en dehors
-$(document).click(function (e) {
+$(document).on('click', function (e) {
     if (!$(e.target).closest('.dropdown-filter').length) {
         $('.dropdown-content').slideUp(200);
     }
 });
 
 
-$(document).ready(function () {
-    // Fonction pour filtrer les cartes
-    function filterCards() {
-        let keyword = $('#mot-cle').val().toLowerCase();
+/*************************
+ * MAP LEAFLET
+ *************************/
+window.myMap = null;
+window.markers = [];
 
-        // Récupérer les catégories cochées
-        let selectedCategories = [];
-        $('.filter-activity:checked').each(function () {
-            selectedCategories.push($(this).val());
-        });
+function createMap() {
+    if (!window.myMap) {
+        window.myMap = L.map('map').setView([48.8566, 2.3522], 13);
 
-        // Parcourir toutes les cartes
-        $('.container .card').each(function () {
-            let title = $(this).data('title').toLowerCase();
-            let category = $(this).data('category');
-
-            // Vérifie si le mot clé est dans le titre ET si la catégorie est sélectionnée
-            if (title.includes(keyword) && selectedCategories.includes(category)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(window.myMap);
+    } else {
+        window.myMap.invalidateSize();
     }
+}
 
-    // Quand on tape dans la barre de recherche
-    $('#mot-cle').on('input', filterCards);
+function updateMapMarkers() {
+    if (!window.myMap) return;
 
-    // Quand on change un filtre catégorie
-    $('.filter-activity').on('change', filterCards);
-});
+    // Supprimer anciens markers
+    window.markers.forEach(marker => window.myMap.removeLayer(marker));
+    window.markers = [];
+
+    const visibleCards = document.querySelectorAll('.card:not([style*="display: none"])');
+
+    visibleCards.forEach(card => {
+        const lat = parseFloat(card.dataset.lat);
+        const lng = parseFloat(card.dataset.lng);
+        if (isNaN(lat) || isNaN(lng)) return;
+
+        const titleLink = card.querySelector('.text a');
+        const titleHTML = titleLink ? titleLink.outerHTML : card.dataset.title;
+
+        const priceDiv = card.querySelector('.new-price');
+        const priceHTML = priceDiv ? priceDiv.innerHTML : '';
+
+        const category = card.dataset.category;
+        const address = card.querySelector('address')?.dataset.address || '';
+
+        const popupContent = `
+            <div>
+                <div>${titleHTML}</div>
+                <address>${address}</address>
+                <div>${category}</div>
+                <div>Prix : ${priceHTML}</div>
+            </div>
+        `;
+
+        const marker = L.marker([lat, lng]).addTo(window.myMap)
+            .bindPopup(popupContent);
+
+        window.markers.push(marker);
+    });
+
+    if (window.markers.length > 0) {
+        const group = L.featureGroup(window.markers);
+        window.myMap.fitBounds(group.getBounds().pad(0.2));
+    }
+}
 
 
+/*************************
+ * FILTRES / RECHERCHE
+ *************************/
+function filterCards() {
+    const keyword = $('#mot-cle').val().toLowerCase();
+    const cpValue = $('#code-postal').val().trim();
+
+    const selectedCategories = [];
+    $('.filter-activity:checked').each(function () {
+        selectedCategories.push($(this).val());
+    });
+
+    $('.container .card').each(function () {
+        const title = $(this).data('title').toLowerCase();
+        const category = $(this).data('category');
+        const cardCP = $(this).data('cp').toString();
+
+        const matchKeyword = title.includes(keyword);
+        const matchCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
+        const matchCP = cpValue === '' || cardCP.startsWith(cpValue);
+
+        if (matchKeyword && matchCategory && matchCP) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+
+    if (window.updateMapMarkers) updateMapMarkers();
+}
+
+// Listeners
+$('#mot-cle').on('input', filterCards);
+$('.filter-activity').on('change', filterCards);
+$('#code-postal').on('input', filterCards);
+
+
+/*************************
+ * TRI
+ *************************/
 $('input[name="sort"]').on('change', function () {
-    let $container = $('.container');
-    let $cards = $container.children('.card');
-    let sortType = $(this).val();
+    const sortType = $(this).val();
+    const $container = $('.container');
+    const $cards = $container.children('.card');
 
     $cards.sort(function (a, b) {
+        if (sortType === 'price-asc') {
+            return $(a).data('price') - $(b).data('price');
+        }
         if (sortType === 'price-desc') {
-            return parseFloat($(b).data('price')) - parseFloat($(a).data('price'));
-        } else if (sortType === 'price-asc') {
-            return parseFloat($(a).data('price')) - parseFloat($(b).data('price'));
-        } else if (sortType === 'title-asc') {
+            return $(b).data('price') - $(a).data('price');
+        }
+        if (sortType === 'title-asc') {
             return $(a).data('title').localeCompare($(b).data('title'));
-        } else if (sortType === 'title-desc') {
+        }
+        if (sortType === 'title-desc') {
             return $(b).data('title').localeCompare($(a).data('title'));
         }
     });
 
-    $container.append($cards); // réinjecte les cartes triées
+    $container.append($cards);
+    updateMapMarkers();
 });
 
+
+
+/*************************
+ * BOUTON AFFICHER LA CARTE
+ *************************/
+$('#btn-show-map').on('click', function () {
+    const mapDiv = $('#map');
+
+    if (mapDiv.is(':visible')) {
+        mapDiv.hide();
+    } else {
+        mapDiv.show();
+        createMap();
+        updateMapMarkers();
+    }
+});
+
+
+/*************************
+ * CLIC SUR UNE CARTE
+ *************************/
+$(document).on('click', '.card', function () {
+    const lat = parseFloat(this.dataset.lat);
+    const lng = parseFloat(this.dataset.lng);
+    if (isNaN(lat) || isNaN(lng)) return;
+
+    $('#map').show();
+    createMap();
+
+    window.myMap.setView([lat, lng], 16);
+
+    const marker = window.markers.find(m => {
+        const p = m.getLatLng();
+        return p.lat === lat && p.lng === lng;
+    });
+
+    if (marker) marker.openPopup();
+});
+
+
+/*************************
+ * URL PARAM (mot-clé)
+ *************************/
 $(document).ready(function () {
     const url = new URL(window.location.href);
     const keyword = url.searchParams.get('mot');
 
     if (keyword) {
-        // 1️⃣ Appliquer le mot-clé une seule fois
         $('#mot-cle').val(keyword);
-        $('#mot-cle').trigger('input');
-
-        // 2️⃣ Nettoyer l’URL (important pour le reload)
+        filterCards();
         url.searchParams.delete('mot');
         window.history.replaceState({}, document.title, url.pathname);
-    } else {
-        // 3️⃣ Si reload ou accès direct → reset
-        $('#mot-cle').val('');
-        $('.card').show();
     }
 });
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    function createMap() {
-        if (!window.myMap) {
-            window.myMap = L.map('map').setView([48.8566, 2.3522], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(window.myMap);
-        } else {
-            window.myMap.invalidateSize();
-        }
-    }
-    const btnShowMap = document.getElementById('btn-show-map');
-
-    btnShowMap.addEventListener('click', function () {
-        const mapDiv = document.getElementById('map');
-
-        if (mapDiv.style.display === 'block') {
-            // Si la carte est visible → on la cache
-            mapDiv.style.display = 'none';
-        } else {
-            // Sinon on affiche la carte
-            mapDiv.style.display = 'block';
-            createMap();
-
-            const cards = document.querySelectorAll('.card');
-            const markers = [];
-
-            cards.forEach(card => {
-
-                const lat = parseFloat(card.dataset.lat);
-                const lng = parseFloat(card.dataset.lng);
-
-                if (!isNaN(lat) && !isNaN(lng)) {
-                    const titleLink = card.querySelector('.text a');
-                    const titleHTML = titleLink ? titleLink.outerHTML : card.dataset.title;
-
-                    const priceDiv = card.querySelector('.new-price');
-                    const priceHTML = priceDiv ? priceDiv.innerHTML : '';
-
-                    const category = card.dataset.category;
-
-                    const addressEl = card.querySelector('address');
-                    const addressText = addressEl ? addressEl.dataset.address : '';
-
-
-                    const popupContent = `
-                    <div>
-                        <div>${titleHTML}</div>
-                         <address>${addressText}</address>
-                        <div>${category}</div>
-                        <div>Prix: ${priceHTML}</div>
-                    </div>
-                `;
-
-                    const marker = L.marker([lat, lng]).addTo(window.myMap)
-                        .bindPopup(popupContent);
-                    markers.push(marker);
-                }
-            });
-
-            if (markers.length > 0) {
-                const group = L.featureGroup(markers);
-                window.myMap.fitBounds(group.getBounds().pad(0.2));
-            }
-        }
-    });
-
-
-    // Clic sur une carte individuelle
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', function () {
-            const mapDiv = document.getElementById('map');
-            mapDiv.style.display = 'block';
-            createMap();
-
-            const lat = parseFloat(card.dataset.lat);
-            const lng = parseFloat(card.dataset.lng);
-
-            // Titre avec lien
-            const titleLink = card.querySelector('.text a');
-            const titleHTML = titleLink ? titleLink.outerHTML : card.dataset.title;
-
-            // Prix
-            const priceDiv = card.querySelector('.new-price');
-            const priceHTML = priceDiv ? priceDiv.innerHTML : '';
-
-            const category = card.dataset.category;
-            const addressEl = card.querySelector('address');
-            const addressText = addressEl ? addressEl.dataset.address : '';
-
-            const popupContent = `
-                <div>
-                    <div>${titleHTML}</div>
-                     <address>${addressText}</address>
-                    <div>${category}</div>
-                    <div>Prix: ${priceHTML}</div>
-                </div>
-            `;
-
-            // Si les markers n'existent pas encore, on les crée tous
-            if (!window.markers || window.markers.length === 0) {
-                window.markers = [];
-                const allCards = document.querySelectorAll('.card');
-                allCards.forEach(c => {
-                    const lat = parseFloat(c.dataset.lat);
-                    const lng = parseFloat(c.dataset.lng);
-                    if (!isNaN(lat) && !isNaN(lng)) {
-                        const titleLink = c.querySelector('.text a');
-                        const titleHTML = titleLink ? titleLink.outerHTML : c.dataset.title;
-                        const priceDiv = c.querySelector('.new-price');
-                        const priceHTML = priceDiv ? priceDiv.innerHTML : '';
-                        const category = c.dataset.category;
-                        const addressEl = c.querySelector('address');
-                        const addressText = addressEl ? addressEl.dataset.address : '';
-
-                        const popupContent = `
-                <div>
-                    <div>${titleHTML}</div>
-                    <address>${addressText}</address>
-                    <div>${category}</div>
-                    <div>Prix: ${priceHTML}</div>
-                </div>
-            `;
-                        const marker = L.marker([lat, lng]).addTo(window.myMap)
-                            .bindPopup(popupContent);
-                        window.markers.push(marker);
-                    }
-                });
-            }
-
-            // Zoom sur la carte cliquée
-            window.myMap.setView([lat, lng], 16);
-
-            // Ouvre le popup du marker correspondant
-            const clickedMarker = window.markers.find(m => {
-                const mLatLng = m.getLatLng();
-                return mLatLng.lat === lat && mLatLng.lng === lng;
-            });
-            if (clickedMarker) clickedMarker.openPopup();
-
-
-            window.myMap.setView([lat, lng], 16);
-        });
-    });
-
-    const cpInput = document.getElementById('code-postal');
-    const cards = document.querySelectorAll('.card');
-
-    cpInput.addEventListener('input', function () {
-        const cpValue = cpInput.value.trim();
-
-        cards.forEach(card => {
-            const cardCP = card.dataset.cp;
-
-            // Si input vide → on montre tout
-            if (cpValue === '') {
-                card.style.display = 'flex';
-            }
-            // Sinon, on filtre
-            else if (cardCP.startsWith(cpValue)) {
-                card.style.display = 'flex';
-            }
-            else {
-                card.style.display = 'none';
-            }
-        });
-    });
-
-});
-
-
 
