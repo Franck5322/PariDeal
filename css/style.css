@@ -385,3 +385,10 @@ ul {
     font-size: medium;
 }
 
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: xx-large;
+    color: darkslategrey;
+    margin: 0px;
+    text-align: right;
+}
