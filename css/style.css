@@ -402,7 +402,7 @@ ul {
 
     body {
         margin: 70px 15px;
-        font-size: smaller;
+        font-size: 0.95em;
     }
 
     .logo {
@@ -436,7 +436,7 @@ ul {
     }
 
     .adresse {
-        font-size: small;
+        font-size: smaller;
     }
 
     .new-price {
