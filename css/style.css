@@ -405,6 +405,10 @@ ul {
         font-size: 0.95em;
     }
 
+    .old-price {
+        font-size: 0.90em;
+    }
+
     .logo {
         margin-left: 20px;
         height: 30px;

@@ -110,11 +110,13 @@ function filterCards() {
 
     $('.container .card').each(function () {
         const title = $(this).data('title').toLowerCase();
-        const category = $(this).data('category');
+        const categories = this.dataset.category.split(',').map(c => c.trim());
         const cardCP = $(this).data('cp').toString();
 
         const matchKeyword = title.includes(keyword);
-        const matchCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
+        const matchCategory = selectedCategories.length === 0 ||
+            categories.some(cat => selectedCategories.includes(cat));
+
         const matchCP = cpValue === '' || cardCP.startsWith(cpValue);
 
         if (matchKeyword && matchCategory && matchCP) {
@@ -188,6 +190,7 @@ $(document).on('click', '.card', function () {
 
     $('#map').show();
     createMap();
+    updateMapMarkers();
 
     window.myMap.setView([lat, lng], 16);
 
