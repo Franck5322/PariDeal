@@ -402,7 +402,7 @@ ul {
 
     body {
         margin: 70px 15px;
-        font-size: medium;
+        font-size: smaller;
     }
 
     .logo {
@@ -440,10 +440,10 @@ ul {
     }
 
     .new-price {
-        font-size: large;
+        font-size: medium;
     }
 
     .condition {
-        font-size: medium
+        font-size: medium;
     }
 }
