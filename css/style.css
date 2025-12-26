@@ -392,3 +392,58 @@ ul {
     margin: 0px;
     text-align: right;
 }
+
+
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    body {
+        margin: 70px 15px;
+        font-size: medium;
+    }
+
+    .logo {
+        margin-left: 20px;
+        height: 30px;
+    }
+
+    .cercle {
+        margin-right: 20px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .input-recherche {
+        flex-direction: column;
+        height: 90px;
+    }
+
+    #mot-cle,
+    #code-postal {
+        width: 95%;
+    }
+
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .card {
+        padding: 8px;
+    }
+
+    .adresse {
+        font-size: small;
+    }
+
+    .new-price {
+        font-size: large;
+    }
+
+    .condition {
+        font-size: medium
+    }
+}
