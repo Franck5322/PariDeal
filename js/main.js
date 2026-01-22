@@ -79,7 +79,7 @@ function updateMapMarkers() {
                 <div>${titleHTML}</div>
                 <address>${address}</address>
                 <div>${category}</div>
-                <div>Prix : ${priceHTML}</div>
+                <div>Tarif : ${priceHTML}</div>
             </div>
         `;
 
