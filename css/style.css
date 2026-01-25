@@ -138,13 +138,16 @@ button:hover {
     text-align: left;
 }
 
+/* Modifiez cette règle existante */
 .card img {
     width: 100%;
-    height: 70%;
+    height: 150px; /* Force une hauteur fixe pour toutes les images */
+    object-fit: cover; /* Garde les proportions sans écraser l'image */
     border-radius: 10px;
+    flex-shrink: 0; /* Empêche l'image de rétrécir si le texte est long */
 }
-
 .price-box {
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -166,7 +169,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     padding: 0px 10px;
-    padding-top: 0px;
+    padding-top: 0px;;
 }
 
 .categorie {
