@@ -141,7 +141,7 @@ button:hover {
 /* Modifiez cette règle existante */
 .card img {
     width: 100%;
-    height: 150px; /* Force une hauteur fixe pour toutes les images */
+    height: 200px; /* Force une hauteur fixe pour toutes les images */
     object-fit: cover; /* Garde les proportions sans écraser l'image */
     border-radius: 10px;
     flex-shrink: 0; /* Empêche l'image de rétrécir si le texte est long */
@@ -453,4 +453,12 @@ ul {
     .condition {
         font-size: medium;
     }
+    
+    .card img {
+    width: 100%;
+    height: 110px; /* Force une hauteur fixe pour toutes les images */
+    object-fit: cover; /* Garde les proportions sans écraser l'image */
+    border-radius: 10px;
+    flex-shrink: 0; /* Empêche l'image de rétrécir si le texte est long */
+}
 }
