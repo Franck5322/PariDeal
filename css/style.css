@@ -141,11 +141,15 @@ button:hover {
 /* Modifiez cette règle existante */
 .card img {
     width: 100%;
-    height: 200px; /* Force une hauteur fixe pour toutes les images */
-    object-fit: cover; /* Garde les proportions sans écraser l'image */
+    height: 200px;
+    /* Force une hauteur fixe pour toutes les images */
+    object-fit: cover;
+    /* Garde les proportions sans écraser l'image */
     border-radius: 10px;
-    flex-shrink: 0; /* Empêche l'image de rétrécir si le texte est long */
+    flex-shrink: 0;
+    /* Empêche l'image de rétrécir si le texte est long */
 }
+
 .price-box {
 
     display: flex;
@@ -169,7 +173,8 @@ button:hover {
     display: flex;
     flex-direction: column;
     padding: 0px 10px;
-    padding-top: 0px;;
+    padding-top: 0px;
+    ;
 }
 
 .categorie {
@@ -453,12 +458,50 @@ ul {
     .condition {
         font-size: medium;
     }
-    
+
     .card img {
-    width: 100%;
-    height: 110px; /* Force une hauteur fixe pour toutes les images */
-    object-fit: cover; /* Garde les proportions sans écraser l'image */
-    border-radius: 10px;
-    flex-shrink: 0; /* Empêche l'image de rétrécir si le texte est long */
+        width: 100%;
+        height: 110px;
+        /* Force une hauteur fixe pour toutes les images */
+        object-fit: cover;
+        /* Garde les proportions sans écraser l'image */
+        border-radius: 10px;
+        flex-shrink: 0;
+        /* Empêche l'image de rétrécir si le texte est long */
+    }
 }
+
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* centre horizontalement */
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    /* largeur du bloc */
+    margin: 4px auto;
+
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }

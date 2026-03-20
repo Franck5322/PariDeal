@@ -44,8 +44,16 @@
             <li>
                 <a href="index.html">Accueil</a>
             </li>
-            <li><a href="pages/activite.html">Toutes les activités</a></li>
-            <li><a href="pages/about_us.html">À propos</a></li>
+            <li>
+                <a href="pages/activite.html">Toutes les activités</a>
+            </li>
+            <li>
+                <a href="pages/about_us.html">À propos</a>
+            </li>
+            <li>
+                <a href="pages/contact.html">Contact</a>
+            </li>
+
 
         </ul>
     </nav>
@@ -66,19 +74,12 @@
 
     <div class="recherche-spot">
 
-        <input class="mot-cle-1" type="text" id="mot-cle" Placeholder="🌟 Recherche par mots clés" autocomplete="off">
-
-
         <button id="btnRecherche" class="recherche"><strong>🔍 Rechercher</strong></button>
         <script>
             document.getElementById('btnRecherche').addEventListener('click', function () {
-                const keyword = encodeURIComponent(document.getElementById('mot-cle').value);
-                window.location.href = `pages/activite.html?mot=${keyword}`;
+                window.location.href = "pages/activite.html";
             });
         </script>
-
-
-
 
 
         <!-- jQuery -->

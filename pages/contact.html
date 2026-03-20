@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../assets/images/parideal-modified.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+
+    <meta property="og:site_name" content="PariDeal">
+</head>
+
+<body>
+
+    <div class="banderole">
+        <a href="../index.html"><img src="../assets/images/PariDeal_V3.png" alt="logo_site" class="logo"></a>
+        <div class="cercle" id="menuBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu" id="sideMenu">
+        <ul>
+            <li>
+                <a href="../index.html">Accueil</a>
+            </li>
+            <li>
+                <a href="../pages/activite.html">Toutes les activités</a>
+            </li>
+            <li>
+                <a href="../pages/about_us.html">À propos</a>
+            </li>
+            <li>
+                <a href="../pages/contact.html">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h2 class="slogan">Contactez-nous 📩</h2>
+
+    <h3>
+        Une idée, une question ou un bon plan à partager ?
+        <br>
+         On est toujours preneurs de retours pour améliorer PariDeal 🚀
+        
+    </h3>
+
+    <br>
+
+    <div class="recherche-spot">
+        <!-- FORMULAIRE -->
+        <form class="contact-form" action="https://formspree.io/f/xnjgrpap" method="POST">
+
+            <input type="text" name="name" placeholder="Prénom" required>
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <textarea name="message" placeholder="Ton message..." rows="5" required></textarea>
+
+            <button type="submit" class="recherche">
+                <strong>Envoyer</strong>
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../js/main.js"></script>
+
+</body>
+
+</html>
