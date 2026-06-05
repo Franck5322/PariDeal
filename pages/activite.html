@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../assets/images/parideal-modified.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities</title>
+    <!-- CSS Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- JS Leaflet -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "PariDeal",
+  "url": "https://parideal.netlify.app/",
+  "logo": "https://parideal.netlify.app/assets/images/parideal-modified.png"
+}
+</script>
+
+    <meta property="og:site_name" content="PariDeal">
+
+</head>
+
+<body>
+    <div class="banderole">
+        <a href="../index.html"><img src="../assets/images/ParisDeal_V4_p.png" alt="logo_site" class="logo"></a>
+        <div class="cercle" id="menuBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu" id="sideMenu">
+
+        <ul>
+
+            <li>
+                <a href="../index.html">Accueil</a>
+            </li>
+            <li><a href="../pages/activite.html">Toutes les activités</a></li>
+            <li><a href="../pages/about_us.html">À propos</a></li>
+            <li>
+                <a href="../pages/contact.html">Contact</a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <h2 class="slogan">Vos activités 🏛️</h2>
+
+    <div class="recherche-activite">
+
+        <div class="input-recherche">
+            <input class="mot-cle-2" type="text" id="mot-cle" Placeholder="🌟 Recherche par mots clés"
+                autocomplete="off">
+
+            <input class="mot-cle-2" type="text" id="code-postal" Placeholder="📌 Code Postal" autocomplete="off">
+        </div>
+
+        <br>
+        <div class="filt-sort">
+            <div class="dropdown-filter">
+                <button class="dropdown-btn"><strong>🗂️ Catégories</strong></button>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" class="filter-activity" value="Musée" checked> Musée</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Exposition" checked>
+                        Exposition</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Théâtre" checked> Théâtre</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Concert" checked> Concert</label><br>
+                    <label><input type="checkbox" class="filter-activity" value="Cinéma" checked> Cinéma</label><br>
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="dropdown-filter">
+                <button class="dropdown-btn"><strong>🔀 Trier par</strong></button>
+                <div class="dropdown-content">
+                    <label><input type="radio" name="sort" class="sort-option" value="price-desc"> Prix
+                        décroissant</label><br>
+                    <label><input type="radio" name="sort" class="sort-option" value="price-asc"> Prix
+                        croissant</label><br>
+                    <label><input type="radio" name="sort" class="sort-option" value="title-asc"> Nom
+                        A→Z</label><br>
+                    <label><input type="radio" name="sort" class="sort-option" value="title-desc"> Nom
+                        Z→A</label><br>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bouton pour afficher la carte (optionnel si tu veux un bouton général) -->
+
+        <div class="show-map">
+            <button class="dropdown-btn-map" id="btn-show-map"><strong>🗺️ Afficher la carte</strong></button>
+
+
+        </div>
+
+
+        <!-- Carte principale -->
+        <div id="map" style="height: 500px; width: 100%; display: none; margin-top: 20px;"></div>
+
+        <br>
+
+
+        <div class="container">
+            <div class="card" data-category="Musée" data-title="Musée du Louvre Art, Histoire, Peinture, Musee"
+                data-price="0" data-lat="48.8606" data-lng="2.3376" data-cp="75001">
+                <img src="../assets/images/musee_louvre.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://ticket.louvre.fr/" target="_blank">
+                            <h3>Musée du Louvre</h3>
+                        </a>
+
+                        <address class="adresse" data-address="8 Rue Sainte-Anne, 75001 Paris">
+                            8 Rue Sainte-Anne, <br>75001 Paris
+                        </address>
+                        <br>
+
+                        <span class="categorie">Musée</span>
+                    </div>
+
+                    <div class="price-box">
+                        <del class="old-price">22€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card" data-category="Théâtre" data-title="Comédie Française Théâtre, Classique, Pièces"
+                data-price="16" data-lat="48.863031258072" data-lng="2.336423848081" data-cp="75001">
+                <img src="../assets/images/comedie-francaise.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.comedie-francaise.fr/fr/en-vente-actuellement" target="_blank">
+                            <h3>Comédie Française</h3>
+                        </a>
+
+                        <address class="adresse" data-address="1 Pl. Colette, 75001 Paris">
+                            1 Pl. Colette, <br>75001 Paris
+                        </address>
+                        <br>
+
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 32€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 16€</span>
+                            <span class="condition">(–28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Musee Rodin Sculpture, Art, Jardin" data-price="0"
+                data-lat="48.855133" data-lng="2.315818" data-cp="75007">
+                <img src="../assets/images/musee_rodin.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-rodin.fr/" target="_blank">
+                            <h3>Musée Rodin</h3>
+                        </a>
+                        <address class="adresse" data-address="77 Rue de Varenne, 75007 Paris">
+                            77 Rue de Varenne, <br>75007 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="UGC Les Halles Cinéma, Film, Loisirs" data-price="9.9"
+                data-lat="48.861048" data-lng="2.347053" data-cp="75001">
+                <img src="../assets/images/ugc-les-halles.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.ugc.fr/cinema-ugc-cine-cite-les-halles.html" target="_blank">
+                            <h3>UGC Les Halles</h3>
+                        </a>
+                        <address class="adresse" data-address="7 Pl. de la Rotonde, 75001 Paris">
+                            7 Pl. de la Rotonde, <br>75001 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15,90€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>9,90€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musée Musee d’Orsay Impressionnisme, Peinture, Musée"
+                data-price="0" data-lat="48.859961" data-lng="2.326561" data-cp="75007">
+                <img src="../assets/images/musee-d-orsay.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-orsay.fr/" target="_blank">
+                            <h3>Musée d’Orsay</h3>
+                        </a>
+                        <address class="adresse" data-address="1 Rue de la Légion d'Honneur, 75007 Paris">
+                            1 Rue de la Légion d'Honneur, <br>75007 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">16€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="card" data-category="Cinéma"
+                data-title="Musee Forum des Images Impressionnisme, Peinture, Musée" data-price="6" data-lat="48.861048"
+                data-lng="2.347350" data-cp="75001">
+                <img src="../assets/images/Forum_images.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.forumdesimages.fr/" target="_blank">
+                            <h3>Forum des Images</h3>
+                        </a>
+                        <address class="adresse" data-address="2 Rue du Cinéma, 75001 Paris">
+                            2 Rue du Cinéma, <br>75001 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">7,50€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>6€</span>
+                            <span class="condition">(Étudiant, –30 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Concert" data-title="Philharmonie de Paris Concert, Musique, Classique"
+                data-price="11" data-lat="48.889706" data-lng="2.393345" data-cp="75019">
+                <img src="../assets/images/Philharmonie_Concert.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://philharmoniedeparis.fr/fr/agenda-selection/jeunes-28-ans" target="_blank">
+                            <h3>Philharmonie de Paris</h3>
+                        </a>
+                        <address class="adresse" data-address="221 Av. Jean Jaurès, 75019 Paris">
+                            221 Av. Jean Jaurès, <br>75019 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 30€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>11€</span>
+                            <span class="condition">(Offre spéciale –28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée d’Art Moderne de Paris Art, Moderne, Exposition" data-price="0"
+                data-lat="48.864017" data-lng="2.297050" data-cp="75016">
+                <img src="../assets/images/musee-art-moderne.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.mam.paris.fr/en/information" target="_blank">
+                            <h3>Musée d’Art Moderne de Paris</h3>
+                        </a>
+                        <address class="adresse" data-address="11 Av. du Président Wilson, 75016 Paris">
+                            11 Av. du Président Wilson, <br>75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card" data-category="Musée" data-title="Musee Petit Palais Art, Musée, Collections"
+                data-price="0" data-lat="48.866316" data-lng="2.313504" data-cp="75008">
+                <img src="../assets/images/petit-palais.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.petitpalais.paris.fr/" target="_blank">
+                            <h3>Petit Palais</h3>
+                        </a>
+                        <address class="adresse" data-address="7 Av. Winston Churchill, 75008 Paris">
+                            7 Av. Winston Churchill,<br> 75008 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre de l’Odéon Théâtre, Classique, Spectacle"
+                data-price="15" data-lat="48.8499" data-lng="2.33881" data-cp="75006">
+                <img src="../assets/images/theatre-odeon.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatre-odeon.eu/" target="_blank">
+                            <h3>Théâtre de l’Odéon</h3>
+                        </a>
+                        <address class="adresse" data-address="Pl. de l’Odéon, 75006 Paris">
+                            Pl. de l’Odéon,<br> 75006 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 30€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 15€</span>
+                            <span class="condition">(–28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Exposition" data-title="Palais de Tokyo Art, Contemporain, Exposition"
+                data-price="9" data-lat="48.863513" data-lng="2.297223" data-cp="75016">
+                <img src="../assets/images/palais-tokyo.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://palaisdetokyo.com/" target="_blank">
+                            <h3>Palais de Tokyo</h3>
+                        </a>
+                        <address class="adresse" data-address="13 Av. du Président Wilson, 75016 Paris">
+                            13 Av. du Président Wilson, <br>75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">13€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>9€</span>
+                            <span class="condition">(Étudiant, –26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Carnavalet Histoire, Paris, Musée"
+                data-price="0" data-lat="48.85705698694" data-lng="2.362850039435" data-cp="75003">
+                <img src="../assets/images/Musee-carnavalet.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.carnavalet.paris.fr/" target="_blank">
+                            <h3>Musée Carnavalet</h3>
+                        </a>
+                        <address class="adresse" data-address="23 Rue de Sévigné, 75003 Paris">
+                            23 Rue de Sévigné, <br>75003 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Exposition"
+                data-title="Fondation Louis Vuitton luxe Art, Luxe, Contemporain" data-price="10" data-lat="48.876902"
+                data-lng="2.263564" data-cp="75016">
+                <img src="../assets/images/fondation-louis-vuitton.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.fondationlouisvuitton.fr/" target="_blank">
+                            <h3>Fondation Louis Vuitton</h3>
+                        </a>
+                        <address class="adresse" data-address="8 Av. du Mahatma Gandhi, 75016 Paris">
+                            8 Av. du Mahatma Gandhi,<br> 75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">16€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Étudiant, –26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Zadkine Sculpture, Art, Jardin"
+                data-price="9" data-lat="48.8455713" data-lng="2.3317281" data-cp="75006">
+                <img src="../assets/images/musee-zadkine.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://zadkine.paris.fr/" target="_blank">
+                            <h3>Musée Zadkine</h3>
+                        </a>
+                        <address class="adresse" data-address="100 bis Rue d’Assas, 75006 Paris">
+                            100 bis Rue d’Assas,<br> 75006 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>9€</span>
+                            <span class="condition">(Étudiant, –27 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Bourdelle Sculpture, Art, Atelier"
+                data-price="0" data-lat="48.842975012419" data-lng="2.318587974794" data-cp="75015">
+                <img src="../assets/images/musee-bourdelle.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.bourdelle.paris.fr/" target="_blank">
+                            <h3>Musée Bourdelle</h3>
+                        </a>
+                        <address class="adresse" data-address="18 Rue Antoine Bourdelle, 75015 Paris">
+                            18 Rue Antoine Bourdelle, <br>75015 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musée Musee Cognacq-Jay Art, Collection, Musée"
+                data-price="0" data-lat="48.858201996823" data-lng="2.361468031239" data-cp="75003">
+                <img src="../assets/images/musee-cognacq-jay.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.museecognacqjay.paris.fr/" target="_blank">
+                            <h3>Musée Cognacq-Jay</h3>
+                        </a>
+                        <address class="adresse" data-address="8 Rue Elzévir, 75003 Paris">
+                            8 Rue Elzévir,<br> 75003 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée"
+                data-title="Musée Musee Guimet (Arts asiatiques) Arts asiatiques, Culture, Musée" data-price="0"
+                data-lat="48.865018998676" data-lng="2.293702020447" data-cp="75016">
+                <img src="../assets/images/musee-guimet.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.guimet.fr/" target="_blank">
+                            <h3>Musée Guimet (Arts asiatiques)</h3>
+                        </a>
+                        <address class="adresse" data-address="6 Pl. d’Iéna, 75016 Paris">
+                            6 Pl. d’Iéna, <br>75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">13€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée"
+                data-title="Musée Musee Jean-Jacques Henner Portrait, Peinture, Musée" data-price="0"
+                data-lat="48.8830349" data-lng="2.3076969" data-cp="75017">
+                <img src="../assets/images/musee-jj-henner.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://musee-henner.fr/" target="_blank">
+                            <h3>Musée Jean-Jacques Henner</h3>
+                        </a>
+                        <address class="adresse" data-address="43 Av. de Villiers, 75017 Paris">
+                            43 Av. de Villiers, <br>75017 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">8€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée"
+                data-title="Palais Galliera Musee (Musée de la Mode) Mode, Musée, Luxe" data-price="12"
+                data-lat="48.866475" data-lng="2.296881" data-cp="75016">
+                <img src="../assets/images/palais-galliera.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.palaisgalliera.paris.fr/" target="_blank">
+                            <h3>Palais Galliera (Musée de la Mode)</h3>
+                        </a>
+                        <address class="adresse" data-address="10 Av. Pierre 1er de Serbie, 75016 Paris">
+                            10 Av. Pierre 1er de Serbie,<br> 75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>12€</span>
+                            <span class="condition">(Étudiant, –27 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musee Musée de la Poste Histoire, Postal, Musée"
+                data-price="0" data-lat="48.841353994255" data-lng="2.317270004338" data-cp="75015">
+                <img src="../assets/images/musee-de-la-poste.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.museedelaposte.fr/" target="_blank">
+                            <h3>Musée de la Poste</h3>
+                        </a>
+                        <address class="adresse" data-address="34 Bd de Vaugirard, 75015 Paris">
+                            34 Bd de Vaugirard, <br>75015 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée des Arts et Métiers Industrie, Science, Technique" data-price="0"
+                data-lat="48.866500" data-lng="2.355300" data-cp="75003">
+                <img src="../assets/images/musee-arts-et-metiers.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.arts-et-metiers.net/" target="_blank">
+                            <h3>Musée des Arts et Métiers</h3>
+                        </a>
+                        <address class="adresse" data-address="60 Rue Réaumur, 75003 Paris">
+                            60 Rue Réaumur, <br>75003 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="mk2 Bibliothèque Cinéma, Film, Loisirs"
+                data-price="8.9" data-lat="48.833708" data-lng="2.376916" data-cp="75013">
+                <img src="../assets/images/mk2-bibliotheque.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.mk2.com/salle/mk2-bibliotheque" target="_blank">
+                            <h3>mk2 Bibliothèque</h3>
+                        </a>
+                        <address class="adresse" data-address="128 Av. de France, 75013 Paris">
+                            128 Av. de France, <br>75013 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12,90€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>8,90€</span>
+                            <span class="condition">(–26 ans week-end)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Exposition"
+                data-title="Fondation Cartier pour l'art contemporain luxe Art, Contemporain, Exposition"
+                data-price="10" data-lat="48.8373683" data-lng="2.331913" data-cp="75014">
+                <img src="../assets/images/fondation-cartier.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.fondationcartier.com/" target="_blank">
+                            <h3>Fondation Cartier pour l’art contemporain</h3>
+                        </a>
+                        <address class="adresse" data-address="261 Bd Raspail, 75014 Paris">
+                            261 Bd Raspail, <br>75014 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(–30 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Concert"
+                data-title="Opéra de Paris – Palais Garnier Opéra, Concert, Classique" data-price="10"
+                data-lat="48.8719" data-lng="2.3316" data-cp="75009">
+                <img src="../assets/images/opera-paris.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.operadeparis.fr/billetterie/offres/avant-premieres-jeunes-1"
+                            target="_blank">
+                            <h3>Opéra de Paris – Palais Garnier</h3>
+                        </a>
+                        <address class="adresse" data-address="Pl. de l’Opéra, 75009 Paris">
+                            Pl. de l’Opéra, <br>75009 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 65€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Offre spéciale –28 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Cité des Sciences et de l'Industrie Science, Industrie, Innovation" data-price="12"
+                data-lat="48.8966" data-lng="2.3886" data-cp="75019">
+                <img src="../assets/images/cite-science-industrie.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.cite-sciences.fr/fr/accueil/" target="_blank">
+                            <h3>Cité des Sciences et de l'Industrie</h3>
+                        </a>
+                        <address class="adresse" data-address="30 Av. Corentin Cariou, 75019 Paris">
+                            30 Av. Corentin Cariou, <br>75019 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>12€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Picasso Art, Peinture, Picasso"
+                data-price="0" data-lat="48.8599" data-lng="2.3620" data-cp="75003">
+                <img src="../assets/images/musee-picasso.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.museepicassoparis.fr" target="_blank">
+                            <h3>Musée Picasso</h3>
+                        </a>
+                        <address class="adresse" data-address="5 Rue de Thorigny, 75003 Paris">
+                            5 Rue de Thorigny, <br>75003 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Musée de l’Orangerie -->
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée de l’Orangerie Impressionnisme, Peinture, Art" data-price="0" data-lat="48.8638"
+                data-lng="2.3266" data-cp="75001">
+                <img src="../assets/images/musee-orangerie.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-orangerie.fr/" target="_blank">
+                            <h3>Musée de l’Orangerie</h3>
+                        </a>
+                        <address class="adresse" data-address="Jardin des Tuileries, 75001 Paris">
+                            Jardin des Tuileries,<br>75001 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12,50€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée du quai Branly Ethnologie, Cultures du monde, Art" data-price="0"
+                data-lat="48.8606" data-lng="2.2976" data-cp="75007">
+                <img src="../assets/images/musee-quai-branly.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.quaibranly.fr/" target="_blank">
+                            <h3>Musée du quai Branly – Jacques Chirac</h3>
+                        </a>
+                        <address class="adresse" data-address="37 Quai Branly, 75007 Paris">
+                            37 Quai Branly,<br>75007 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Cernuschi Asie, Arts, Sculptures"
+                data-price="0" data-lat="48.879638001732" data-lng="2.312456025887" data-cp="75008">
+                <img src="../assets/images/musee-cernushi.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.cernuschi.paris.fr/" target="_blank">
+                            <h3>Musée Cernuschi</h3>
+                        </a>
+                        <address class="adresse" data-address="7 Av. Vélasquez, 75008 Paris">
+                            7 Av. Vélasquez,<br>75008 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Théâtre"
+                data-title="Théâtre de la Ville Danse, Théâtre contemporain, Performance" data-price="15"
+                data-lat="48.857345994961" data-lng="2.347790022543" data-cp="75004">
+                <img src="../assets/images/theatre-ville.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatredelaville-paris.com/" target="_blank">
+                            <h3>Théâtre de la Ville</h3>
+                        </a>
+                        <address class="adresse" data-address="2 Pl. du Châtelet, 75004 Paris">
+                            2 Pl. du Châtelet,<br>75004 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 29€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 15€</span>
+                            <span class="condition">(Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée de la Libération Histoire, Résistance, Guerre" data-price="0"
+                data-lat="48.834005998836" data-lng="2.331883014334" data-cp="75014">
+                <img src="../assets/images/musee-liberation-paris.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.museeliberation-leclerc-moulin.paris.fr/" target="_blank">
+                            <h3>Musée de la Libération de Paris</h3>
+                        </a>
+                        <address class="adresse" data-address="4 Av. du Colonel Henri Rol-Tanguy, 75014 Paris">
+                            4 Av. du Colonel Henri Rol-Tanguy,<br>75014 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="card" data-category="Exposition"
+                data-title="Institut des Cultures d’Islam Islam, Arts, Expositions" data-price="0" data-lat="48.8889"
+                data-lng="2.3536" data-cp="75018">
+                <img src="../assets/images/institut-culture-islam.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.institut-cultures-islam.org/" target="_blank">
+                            <h3>Institut des Cultures d’Islam</h3>
+                        </a>
+                        <address class="adresse" data-address="19 Rue Léon, 75018 Paris">
+                            19 Rue Léon,<br>75018 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price"></del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Marmottan Monet Impressionnisme, Monet"
+                data-price="9" data-lat="48.859210004499" data-lng="2.267282010181" data-cp="75016">
+                <img src="../assets/images/musee-marmotan-monet.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.marmottan.fr/" target="_blank">
+                            <h3>Musée Marmottan Monet</h3>
+                        </a>
+                        <address class="adresse" data-address="2 Rue Louis Boilly, 75016 Paris">
+                            2 Rue Louis Boilly, <br>75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>9€</span>
+                            <span class="condition">(Étudiant de –25 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Jacquemart-André Art, Peinture, Sculpture"
+                data-price="15" data-lat="48.8756" data-lng="2.3102" data-cp="75008">
+                <img src="../assets/images/musee-jacquemar-andre.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-jacquemart-andre.com/" target="_blank">
+                            <h3>Musée Jacquemart-André</h3>
+                        </a>
+                        <address class="adresse" data-address="158 Bd Haussmann, 75008 Paris">
+                            158 Bd Haussmann, <br>75008 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">18,50€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>15€</span>
+                            <span class="condition">(Étudiant, –26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée" data-title="Musee Musée de Cluny Art, Moyen Âge, Histoire"
+                data-price="0" data-lat="48.850332018384" data-lng="2.343933005977" data-cp="75005">
+                <img src="../assets/images/musee-cluny.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-moyenage.fr/" target="_blank">
+                            <h3>Musée de Cluny</h3>
+                        </a>
+                        <address class="adresse" data-address="6 Pl. Paul Painlevé, 75005 Paris">
+                            6 Pl. Paul Painlevé, <br>75005 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Exposition, Théâtre, Concert"
+                data-title="Le Centquatre Art, Contemporain, Exposition" data-price="10" data-lat="48.889982988541"
+                data-lng="2.371506030844" data-cp="75019">
+                <img src="../assets/images/104-Paris.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.104.fr/" target="_blank">
+                            <h3>Le Centquatre – 104 Paris</h3>
+                        </a>
+                        <address class="adresse" data-address="5 Rue Curial, 75019 Paris">
+                            5 Rue Curial, <br>75019 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Exposition, Théâtre, Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 18€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 10€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Exposition"
+                data-title="Maison Européenne de la Photographie Photographie, Exposition" data-price="9"
+                data-lat="48.855079989347" data-lng="2.359243977051" data-cp="75004">
+                <img src="../assets/images/MEP.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.mep-fr.org/en/homepage/" target="_blank">
+                            <h3>Maison Européenne de la Photographie</h3>
+                        </a>
+                        <address class="adresse" data-address="5/7 Rue de Fourcy, 75004 Paris">
+                            5/7 Rue de Fourcy, <br>75004 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Exposition</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>9€</span>
+                            <span class="condition">(Étudiant, –25 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre du Châtelet Théâtre, Classique, Musical"
+                data-price="10" data-lat="48.857614006315" data-lng="2.346757958805" data-cp="75001">
+                <img src="../assets/images/theatre-chatelet.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.chatelet.com/cartesetpass/" target="_blank">
+                            <h3>Théâtre du Châtelet</h3>
+                        </a>
+                        <address class="adresse" data-address="1 Pl. du Châtelet, 75001 Paris">
+                            1 Pl. du Châtelet, <br>75001 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 49€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Offre spéciale –30 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre du Rond-Point Théâtre, Classique"
+                data-price="12" data-lat="48.867784020895" data-lng="2.310548975277" data-cp="75008">
+                <img src="../assets/images/theatre-rond-point.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatredurondpoint.fr/" target="_blank">
+                            <h3>Théâtre du Rond-Point</h3>
+                        </a>
+                        <address class="adresse" data-address="2 bis Avenue Franklin Delano Roosevelt, 75008 Paris">
+                            2 bis Av. F. D. Roosevelt, <br>75008 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 38€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 12€</span>
+                            <span class="condition">(Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Théâtre, Concert" data-title="Théâtre des Champs-Élysées Théâtre, Concert"
+                data-price="15" data-lat="48.865671990842" data-lng="2.303279015377" data-cp="75008">
+                <img src="../assets/images/theatre-champs-elysee.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatrechampselysees.fr/billetterie-infos/carte-liberte-jeunes"
+                            target="_blank">
+                            <h3>Théâtre des Champs-Élysées</h3>
+                        </a>
+                        <address class="adresse" data-address="15 Avenue Montaigne, 75008 Paris">
+                            15 Av. Montaigne, <br>75008 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre, Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 40€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 15€</span>
+                            <span class="condition">(Carte Jeunes –30 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="Cinéma Le Louxor Film, Art et Essai" data-price="6"
+                data-lat="48.883472009973" data-lng="2.349865968502" data-cp="75010">
+                <img src="../assets/images/cinema-louxor.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.cinemalouxor.fr/" target="_blank">
+                            <h3>Cinéma Le Louxor</h3>
+                        </a>
+                        <address class="adresse" data-address="170 Bd de Magenta, 75010 Paris">
+                            170 Bd de Magenta, <br>75010 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11,50€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>6€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="mk2 Bastille Film, Art et Essai" data-price="8.9"
+                data-lat="48.854302986923" data-lng="2.369210981936" data-cp="75011">
+                <img src="../assets/images/mk2-bastille.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.mk2.com/salle/mk2-bastille-beaumarchais-fg-st-antoine" target="_blank">
+                            <h3>mk2 Bastille</h3>
+                        </a>
+                        <address class="adresse" data-address="1 Bd Richard Lenoir, 75011 Paris">
+                            1 Bd Richard Lenoir, <br>75011 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12,90€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>8,90€</span>
+                            <span class="condition">(–26 ans week-end)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Cinéma" data-title="Cinéma des Cinéastes Film, Art et Essai"
+                data-price="8.7" data-lat="48.884300016279" data-lng="2.326889998432" data-cp="75017">
+                <img src="../assets/images/cinema-cineastes.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://cinema-des-cineastes.fr/" target="_blank">
+                            <h3>Cinéma des Cinéastes</h3>
+                        </a>
+                        <address class="adresse" data-address="7 Avenue de Clichy, 75017 Paris">
+                            7 Av. de Clichy, <br>75017 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12,29€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>8,70€</span>
+                            <span class="condition">(Étudiant)</span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musee Musée Eugène Delacroix Peinture, Art, Histoire"
+                data-price="0" data-lat="48.854445018272" data-lng="2.335641962632" data-cp="75006">
+                <img src="../assets/images/musee-delacroix.png" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.musee-delacroix.fr" target="_blank">
+                            <h3>Musée Delacroix</h3>
+                        </a>
+                        <address class="adresse" data-address="6 Rue de Furstenberg, 75006 Paris">
+                            6 Rue de Furstenberg,<br>75006 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">9€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée de la Chasse et de la Nature Art, Nature, Histoire" data-price="11.5"
+                data-lat="48.860127" data-lng="2.369176" data-cp="75003">
+                <img src="../assets/images/musee-chasse.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.chassenature.org" target="_blank">
+                            <h3>Musée de la Chasse et de la Nature</h3>
+                        </a>
+                        <address class="adresse" data-address="62 Rue des Archives, 75003 Paris">
+                            62 Rue des Archives,<br>75003 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">13,50€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>11,50€</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée de la Monnaie de Paris Histoire, Art, Numismatique" data-price="0"
+                data-lat="48.856746018332" data-lng="2.339199996711" data-cp="75006">
+                <img src="../assets/images/musee-monnaie-paris.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.monnaiedeparis.fr" target="_blank">
+                            <h3>Musée de la Monnaie de Paris</h3>
+                        </a>
+                        <address class="adresse" data-address="11 Quai de Conti, 75006 Paris">
+                            11 Quai de Conti,<br>75006 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">12€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée" data-title="Musee Musée de l’Homme Histoire, Anthropologie, Culture"
+                data-price="0" data-lat="48.862713828885" data-lng="2.282485960747" data-cp="75016">
+                <img src="../assets/images/musee-homme.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.museedelhomme.fr" target="_blank">
+                            <h3>Musée de l’Homme</h3>
+                        </a>
+                        <address class="adresse" data-address="17 Pl. du Trocadéro, 75016 Paris">
+                            17 Pl. du Trocadéro,<br>75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">15€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Cité de l'architecture et du patrimoine Architecture, Histoire, Art" data-price="0"
+                data-lat="48.862904998876" data-lng="2.288341961004" data-cp="75016">
+                <img src="../assets/images/cite-architecture.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.citedelarchitecture.fr/fr" target="_blank">
+                            <h3>Cité de l'architecture et du patrimoine</h3>
+                        </a>
+                        <address class="adresse" data-address="1 Pl. du Trocadéro et du 11 Novembre, 75016 Paris">
+                            1 Pl. du Trocadéro et du 11 Novembre,<br>75016 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">13€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée des Égouts de Paris Histoire, Science, Curiosité" data-price="0"
+                data-lat="48.862940949387" data-lng="2.301696732114" data-cp="75007">
+                <img src="../assets/images/musee-egout.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://musee-egouts.paris.fr/en/" target="_blank">
+                            <h3>Musée des Égouts de Paris</h3>
+                        </a>
+                        <address class="adresse" data-address="Pont de l'Alma, 75007 Paris">
+                            Pont de l'Alma,<br>75007 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">9€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(–26 ans de l'UE)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Musée"
+                data-title="Musee Musée de la Préfecture de Police Histoire, Police, Curiosité" data-price="0"
+                data-lat="48.849472999037" data-lng="2.348570964461" data-cp="75005">
+                <img src="../assets/images/musee-prefecture-police.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.prefecturedepolice.interieur.gouv.fr/musee" target="_blank">
+                            <h3>Musée de la Préfecture de Police</h3>
+                        </a>
+                        <address class="adresse" data-address="4 Rue de la Montagne Sainte-Geneviève, 75005 Paris">
+                            4 Rue de la Montagne Sainte-Geneviève,<br>75005 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Musée</span>
+                    </div>
+                    <div class="price-box">
+
+                        <div class="new-price">
+                            <span>Gratuit</span>
+                            <span class="condition">(Collections permanentes)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre de la Colline, Théâtre contemporain"
+                data-price="10" data-lat="48.864546007879" data-lng="2.397658993675" data-cp="75020">
+                <img src="../assets/images/theatre-colline.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.colline.fr/" target="_blank">
+                            <h3>Théâtre de la Colline</h3>
+                        </a>
+                        <address class="adresse" data-address="15 Rue Malte Brun, 75020 Paris">
+                            15 Rue Malte Brun,<br>75020 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">33€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre de la Bastille, Théâtre contemporain"
+                data-price="12" data-lat="48.855861015085" data-lng="2.375554992992" data-cp="75011">
+                <img src="../assets/images/theatre-bastille.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatre-bastille.com/" target="_blank">
+                            <h3>Théâtre de la Bastille</h3>
+                        </a>
+                        <address class="adresse" data-address="76 Rue de la Roquette, 75011 Paris">
+                            76 Rue de la Roquette,<br>75011 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">26€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>12€</span>
+                            <span class="condition">(Étudiant de –25 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Théâtre des Bouffes du Nord -->
+            <div class="card" data-category="Théâtre, Concert"
+                data-title="Théâtre des Bouffes du Nord, Théâtre contemporain" data-price="10"
+                data-lat="48.884177011849" data-lng="2.358622961845" data-cp="75010">
+                <img src="../assets/images/theatre-bouffes-nord.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.bouffesdunord.com/" target="_blank">
+                            <h3>Théâtre des Bouffes du Nord</h3>
+                        </a>
+                        <address class="adresse" data-address="37 bis Bd de la Chapelle, 75010 Paris">
+                            37 bis Bd de la Chapelle,<br>75010 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre, Concert</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 28€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 10€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre Silvia Monfort, Théâtre contemporain"
+                data-price="10" data-lat="48.840425991845" data-lng="2.324076025898" data-cp="75014">
+                <img src="../assets/images/theatre-silvia-monfort.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://theatresilviamonfort.eu/" target="_blank">
+                            <h3>Théâtre Silvia Monfort</h3>
+                        </a>
+                        <address class="adresse" data-address="10 Rue de la Gaîté, 75014 Paris">
+                            10 Rue de la Gaîté,<br>75014 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">28€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="card" data-category="Théâtre" data-title="Théâtre Montparnasse, Théâtre classique"
+                data-price="10" data-lat="48.839498995263" data-lng="2.323533968219" data-cp="75014">
+                <img src="../assets/images/theatre-montparnasse.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.theatremontparnasse.com/offres/" target="_blank">
+                            <h3>Théâtre Montparnasse</h3>
+                        </a>
+                        <address class="adresse" data-address="31 Rue de la Gaîté, 75014 Paris">
+                            31 Rue de la Gaîté,<br>75014 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 43€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>10€</span>
+                            <span class="condition">(Offre spéciale –26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Cinéma" data-title="Le Grand Rex, Cinéma, Spectacle" data-price="11.5"
+                data-lat="48.870556000094" data-lng="2.347665970376" data-cp="75002">
+                <img src="../assets/images/le-grand-rex.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.legrandrex.com/" target="_blank">
+                            <h3>Le Grand Rex</h3>
+                        </a>
+                        <address class="adresse" data-address="1 Boulevard Poissonnière, 75002 Paris">
+                            1 Boulevard Poissonnière,<br>75002 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">≈ 14€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>≈ 11,50€</span>
+                            <span class="condition">(Étudiant, –26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Cinéma" data-title="La Cinémathèque française, Cinéma, Histoire du cinéma"
+                data-price="1" data-lat="48.837295015732" data-lng="2.382613980389" data-cp="75012">
+                <img src="../assets/images/cinematheque-francaise.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.cinematheque.fr/moins-de-26-ans-et-etudiants.html" target="_blank">
+                            <h3>La Cinémathèque française</h3>
+                        </a>
+                        <address class="adresse" data-address="51 Rue de Bercy, 75012 Paris">
+                            51 Rue de Bercy,<br>75012 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">7€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>1€</span>
+                            <span class="condition">(Offre spéciale Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Cinéma" data-title="Le Champo, Cinéma, Art et Essai" data-price="7"
+                data-lat="48.84998002036" data-lng="2.343222974959" data-cp="75005">
+                <img src="../assets/images/le-champo.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="http://www.lechampo.com/" target="_blank">
+                            <h3>Le Champo</h3>
+                        </a>
+                        <address class="adresse" data-address="51 Rue des Écoles, 75005 Paris">
+                            51 Rue des Écoles,<br>75005 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11,50€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>7€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Cinéma" data-title="Le Brady, Cinéma, Art et Essai" data-price="6.5"
+                data-lat="48.871779003587" data-lng="2.355402969921" data-cp="75010">
+                <img src="../assets/images/le-brady.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.lebrady.fr/" target="_blank">
+                            <h3>Le Brady</h3>
+                        </a>
+                        <address class="adresse" data-address="39 Boulevard de Strasbourg, 75010 Paris">
+                            39 Boulevard de Strasbourg,<br>75010 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">10€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>6,50€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="card" data-category="Cinéma" data-title="Le Grand Action, Cinéma, Art et Essai" data-price="7.5"
+                data-lat="48.847537994779" data-lng="2.352131010197" data-cp="75005">
+                <img src="../assets/images/le-grand-action.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.legrandaction.com/" target="_blank">
+                            <h3>Le Grand Action</h3>
+                        </a>
+                        <address class="adresse" data-address="5 Rue des Écoles, 75005 Paris">
+                            5 Rue des Écoles,<br>75005 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">11,60€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>7,50€</span>
+                            <span class="condition">(–26 ans)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card" data-category="Cinéma, Théâtre" data-title="L’Épée de Bois, Cinéma et Théâtre"
+                data-price="7.9" data-lat="48.881955011227" data-lng="2.31069498803" data-cp="75004">
+                <img src="../assets/images/lepee-de-bois.jpg" alt="Photo">
+                <div class="bloc-text">
+                    <div class="text">
+                        <a href="https://www.cine-epeedebois.fr/" target="_blank">
+                            <h3>L’Épée de Bois</h3>
+                        </a>
+                        <address class="adresse" data-address="1 Place du Général Catroux, 75004 Paris">
+                            1 Place du Général Catroux,<br>75004 Paris
+                        </address>
+                        <br>
+                        <span class="categorie">Cinéma, Théâtre</span>
+                    </div>
+                    <div class="price-box">
+                        <del class="old-price">9,90€ (Plein Tarif)</del>
+                        <div class="new-price">
+                            <span>7,90€</span>
+                            <span class="condition">(Étudiant)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+        <!-- Select2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <!-- Ton JS séparé -->
+        <script src="../js/main.js"></script>
+
+
+</body>
+
+</html>

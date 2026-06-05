@@ -1,0 +1,76 @@
+Musée du Louvre
+
+Comédie Française
+
+Musée Rodin
+
+UGC Les Halles
+
+Musée d’Orsay 
+
+Forum des Images 
+
+Philharmonie de Paris 
+
+Musée d’Art Moderne de Paris 
+
+Petit Palais
+
+Théâtre de l’Odéon 
+
+Palais de Tokyo 
+
+Musée Carnavalet 
+
+Fondation Louis Vuitton 
+
+Musée Zadkine
+
+Musée Bourdelle 
+
+Musée Cognacq-Jay 
+
+Musée Guimet 
+
+Musée Jean-Jacques Henner 
+
+Palais Galliera 
+
+Musée de la Poste 
+
+Musée des Arts et Métiers 
+
+mk2 Bibliothèque 
+
+Fondation Cartier pour l’art contemporain 
+
+Opéra de Paris – Palais Garnier 
+
+Cité des Sciences et de l'Industrie
+
+Musée Picasso
+
+Musée Orangerie
+
+Musée quai Branly
+
+Musée Cernuschi
+
+Théâtre de la Ville
+
+Musée Libération de Paris
+
+Institut cultures Islam
+
+
+  "Musée Marmottan Monet",
+  "Musée Jacquemart-André",
+  "Musée de Cluny",
+  "Le Centquatre – 104 Paris",
+  "Maison Européenne de la Photographie",
+  "Théâtre du Châtelet",
+  "Théâtre du Rond-Point",
+  "Théâtre des Champs-Élysées",
+  "Cinéma Le Louxor",
+  "mk2 Bastille",
+  "Cinéma des Cinéastes"
